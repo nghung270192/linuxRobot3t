@@ -788,7 +788,7 @@ catch {
 NoteBook ${pane_top}.tabs \
 	-borderwidth 2 \
 	-arcradius 3 \
-        -width 100 -height 100
+        -width 700 -height 100
 proc show_all_tabs w {
     upvar 0 NoteBook::$w data
     set a [winfo reqwidth $w]
@@ -806,7 +806,7 @@ after 1 after idle set_pane_minsize
 set _tabs_manual [${pane_top}.tabs insert end manual -text [_ "Manual Control \[F3\]"] -raisecmd {focus .; ensure_manual}]
 set _tabs_mdi [${pane_top}.tabs insert end mdi -text [_ "MDI \[F5\]"]]
 
-$_tabs_manual configure -borderwidth 2 -width 300
+$_tabs_manual configure -borderwidth 2 -width 800
 $_tabs_mdi configure -borderwidth 2
 
 ${pane_top}.tabs itemconfigure mdi -raisecmd "[list focus ${_tabs_mdi}.command]; ensure_mdi"
@@ -819,39 +819,167 @@ after idle {
 }
 
 #them test cho nay
-frame $_tabs_manual.label
-frame $_tabs_manual.label1
-label $_tabs_manual.label1.l
-setup_widget_accel $_tabs_manual.label1.l [_ "G Code"]
-pack $_tabs_manual.label1.l -padx 1 -pady 1
-frame $_tabs_manual.fr 
-text $_tabs_manual.fr.text \
+
+#tao frame hien thi gcode
+frame $_tabs_manual.gcode -borderwidth 2 -background gray
+label $_tabs_manual.gcode.gcode
+setup_widget_accel $_tabs_manual.gcode.gcode [_ "G Code"]
+pack $_tabs_manual.gcode.gcode
+#grid $_tabs_manual.gcode -row 0 -column 0 -pady 4 -padx 4
+
+
+text $_tabs_manual.gcode.text \
 	-borderwidth 0 \
 	-exportselection 0 \
-	-height 15 \
+	-height 25 \
         -width 60 \
 	-highlightthickness 0 \
 	-relief flat \
 	-takefocus 0 \
-	-yscrollcommand [list $_tabs_manual.fr.sb set]
-$_tabs_manual.fr.text insert end {}
-bind $_tabs_manual.fr.text <Configure> { goto_sensible_line }
-scrollbar $_tabs_manual.fr.sb \
+	-yscrollcommand [list $_tabs_manual.gcode.sb set]
+$_tabs_manual.gcode.text insert end {}
+bind $_tabs_manual.gcode.text <Configure> { goto_sensible_line }
+scrollbar $_tabs_manual.gcode.sb \
 	-borderwidth 0 \
-	-command [list $_tabs_manual.fr.text yview] \
+	-command [list $_tabs_manual.gcode.text yview] \
 	-highlightthickness 0
-pack $_tabs_manual.fr.sb -side right -fill y
-pack $_tabs_manual.fr.text -side left -fill both -expand false
-grid $_tabs_manual.fr -row 1 -column 0
+pack $_tabs_manual.gcode.sb -side right -fill y
+pack $_tabs_manual.gcode.text -side left -fill both -expand false
+
+grid $_tabs_manual.gcode -row 0 -column 0
+#ket thuc phan tao frame hien thi gcode
+
+#tao frame cho phan hien thi cac truc
+
+set _axes_conntrol [frame $_tabs_manual.axes_control -borderwidth 2 -background red]
+grid $_tabs_manual.axes_control\
+	-column 1 \
+	-row 0 \
+	-sticky nesw \
+	-padx 2 \
+	-pady 2
+frame $_axes_conntrol.axis -borderwidth 2 -background blue
+label $_axes_conntrol.axis.label
+setup_widget_accel $_axes_conntrol.axis.label [_ Axis:]
+frame $_axes_conntrol.axes -borderwidth 2 -background gray
+frame $_axes_conntrol.axes1 -borderwidth 2 -background gray
+#grid rowconfigure $_tabs_manual 200 -weight 1
+#grid columnconfigure $_tabs_manual 200 -weight 1
+# Grid widget $_tabs_manual.axis
+pack $_axes_conntrol.axis.label
+
+grid $_axes_conntrol.axis
 
 
-set _axes_conntrol [frame ${pane_top}.axes_control -width 40 ]
 
-#ket thuc phan test
-frame $_axes_conntrol.axes 
-label $_axes_conntrol.axis -borderwidth 2 -background blue
-setup_widget_accel $_axes_conntrol.axis [_ Axis:]
-pack $_axes_conntrol.axes -fill both -expand false
+grid $_axes_conntrol.axes1 \
+	-column 0 \
+	-row 1 \
+	-padx 4
+
+button $_axes_conntrol.axes1.axisxbt \
+	-padx 0 \
+	-width 7 \
+        -text "Zero X" \
+        -command home_axis_x
+        
+grid $_axes_conntrol.axes1.axisxbt \
+	-column 0 \
+	-row 0 \
+	-padx 4
+bind <Key>{}
+button $_axes_conntrol.axes1.axisybt \
+	-padx 0 \
+	-width 7 \
+        -text "Zero Y" \
+        -command home_axis_y
+grid $_axes_conntrol.axes1.axisybt \
+	-column 0 \
+	-row 1 \
+	-padx 4
+
+button $_axes_conntrol.axes1.axiszbt \
+	-padx 0 \
+	-width 7 \
+        -text "Zero Z" \
+        -command home_axis_z
+grid $_axes_conntrol.axes1.axiszbt \
+	-column 0 \
+	-row 2 \
+	-padx 4
+
+button $_axes_conntrol.axes1.axisabt \
+	-padx 0 \
+	-width 7 \
+        -text "Zero A" \
+        -command home_axis_a
+grid $_axes_conntrol.axes1.axisabt \
+	-column 0 \
+	-row 3 \
+	-padx 4
+
+button $_axes_conntrol.axes1.axisbbt \
+	-padx 0 \
+	-width 7 \
+        -text "Zero B" \
+        -command home_axis_b
+grid $_axes_conntrol.axes1.axisbbt \
+	-column 0 \
+	-row 4 \
+	-padx 4
+
+button $_axes_conntrol.axes1.axiscbt \
+	-padx 0 \
+	-width 7 \
+        -text "Zero C" \
+        -command home_axis_c
+grid $_axes_conntrol.axes1.axiscbt \
+	-column 0 \
+	-row 5 \
+	-padx 4
+
+button $_axes_conntrol.axes1.axisubt \
+	-padx 0 \
+	-width 7 \
+        -text "Zero U" \
+        -command home_axis_u
+grid $_axes_conntrol.axes1.axisubt \
+	-column 0 \
+	-row 6\
+	-padx 4
+
+button $_axes_conntrol.axes1.axisvbt \
+	-padx 0 \
+	-width 7 \
+        -text "Zero V" \
+        -command home_axis_v
+grid $_axes_conntrol.axes1.axisvbt \
+	-column 0 \
+	-row 7 \
+	-padx 4
+
+button $_axes_conntrol.axes1.axiswbt \
+	-padx 0 \
+	-width 7 \
+        -text "Zero W" \
+        -command home_axis_w
+grid $_axes_conntrol.axes1.axiswbt \
+	-column 0 \
+	-row 8 \
+	-padx 4
+
+
+#ket thuc phan frame
+
+#tao preview de xem
+set _preview_frame [frame $_tabs_manual.preview_frame -borderwidth 2 -background red]
+grid $_tabs_manual.preview_frame\
+	-column 2 \
+	-row 0 \
+	-sticky nesw \
+	-padx 2 \
+	-pady 2
+#ket thuc phan tao preview
 radiobutton $_axes_conntrol.axes.axisx \
 	-anchor w \
 	-padx 0 \
@@ -861,10 +989,6 @@ radiobutton $_axes_conntrol.axes.axisx \
         -text X \
         -command axis_activated
 
-grid $_axes_conntrol.axes.axisx  \
-	-column 0 \
-	-row 2 \
-	-padx 4
 radiobutton $_axes_conntrol.axes.axisy \
 	-anchor w \
 	-padx 0 \
@@ -937,6 +1061,7 @@ radiobutton $_axes_conntrol.axes.axisw \
 	-width 2 \
         -text W \
         -command axis_activated
+
 
 #...................................
 frame $_axes_conntrol.joints
@@ -1022,7 +1147,7 @@ radiobutton $_axes_conntrol.joints.joint8 \
 	-width 2 \
         -text 8 \
         -command axis_activated
-
+#tao frame cho phan hien thi cac truc
 #..........................
 frame $_axes_conntrol.jogf
 frame $_axes_conntrol.jogf.jog
@@ -1639,20 +1764,14 @@ grid .info \
 	-sticky ew
 
 # Grid widget ${pane_top}.right
-grid ${pane_top}.right \
-	-column 2 \
-	-row 1 \
-	-columnspan 2 \
-	-padx 2 \
-	-pady 2 \
-	-rowspan 99 \
-	-sticky nesw
-grid ${pane_top}.axes_control\
-	-column 1 \
-	-row 1 \
-	-sticky nesw \
-	-padx 2 \
-	-pady 2
+#grid ${pane_top}.right \
+#	-column 2 \
+#	-row 1 \
+#	-columnspan 2 \
+#	-padx 2 \
+#	-pady 2 \
+#	-rowspan 99 \
+#	-sticky nesw
 grid ${pane_top}.tabs \
 	-column 0 \
 	-row 1 \
@@ -1698,7 +1817,7 @@ set INTERP_WAITING 4
 set TRAJ_MODE_FREE 1
 set KINEMATICS_IDENTITY 1
 
-set manual [concat [winfo children $_axes_conntrol.axes] \
+set manual [concat [winfo children $_axes_conntrol.axes1] \
     $_axes_conntrol.jogf.zerohome.home \
     $_axes_conntrol.jogf.jog.jogminus \
     $_axes_conntrol.jogf.jog.jogplus \
@@ -1886,11 +2005,11 @@ proc joint_mode_switch {args} {
     if {$::motion_mode == $::TRAJ_MODE_FREE && $::kinematics_type != $::KINEMATICS_IDENTITY} {
         grid forget $::_axes_conntrol.axes
         grid $::_axes_conntrol.joints -column 1 -row 0 -padx 0 -pady 0 -sticky w
-        setup_widget_accel $::_axes_conntrol.axis [_ Joint:]
+        setup_widget_accel $::_axes_conntrol.axis.label [_ Joint:]
     } else {
         grid forget $::_axes_conntrol.joints
         grid $::_axes_conntrol.axes -column 1 -row 0 -padx 0 -pady 0 -sticky w
-        setup_widget_accel $::_axes_conntrol.axis [_ Axis:]
+        setup_widget_accel $::_axes_conntrol.axis.label [_ Axis:]
     }    
 }
 
@@ -2060,7 +2179,7 @@ proc size_menubutton_to_entries {w} {
 }
 
 size_combobox_to_entries $_axes_conntrol.jogf.jog.jogincr
-size_label_to_strings $_axes_conntrol.axis [_ Joint:] [_ Axis:]
+size_label_to_strings $_axes_conntrol.axis.label [_ Joint:] [_ Axis:]
 
 proc setval {vel max_speed} {
     if {$vel == 0} { return 0 }

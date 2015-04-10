@@ -1175,6 +1175,7 @@ def open_file_guts(f, filtered=False, addrecent=True):
 tabs_mdi = str(root_window.tk.call("set", "_tabs_mdi"))
 tabs_manual = str(root_window.tk.call("set", "_tabs_manual"))
 tabs_preview = str(root_window.tk.call("set", "_tabs_preview"))
+preview_frame = str(root_window.tk.call("set", "_preview_frame"))
 axes_conntrol = str(root_window.tk.call("set", "_axes_conntrol"))
 tabs_numbers = str(root_window.tk.call("set", "_tabs_numbers"))
 pane_top = str(root_window.tk.call("set", "pane_top"))
@@ -1183,8 +1184,8 @@ widgets = nf.Widgets(root_window,
     ("help_window", Toplevel, ".keys"),
     ("about_window", Toplevel, ".about"),
     #("text", Text, pane_bottom + ".t.text"),
-    ("text", Text, tabs_manual + ".fr.text"),
-    ("preview_frame", Frame, tabs_preview),
+    ("text", Text, tabs_manual + ".gcode.text"),
+    ("preview_frame", Frame, preview_frame),
     ("numbers_text", Text, tabs_numbers + ".text"),
     ("tabs", bwidget.NoteBook, pane_top + ".tabs"),
     ("right", bwidget.NoteBook, pane_top + ".right"),
@@ -1192,16 +1193,16 @@ widgets = nf.Widgets(root_window,
     ("mdi_command", Entry, tabs_mdi + ".command"),
     ("code_text", Text, tabs_mdi + ".gcodes"),
 
-    ("axes", Radiobutton, axes_conntrol + ".axes"),
-    ("axis_x", Radiobutton, axes_conntrol + ".axes.axisx"),
-    ("axis_y", Radiobutton, axes_conntrol + ".axes.axisy"),
-    ("axis_z", Radiobutton, axes_conntrol + ".axes.axisz"),
-    ("axis_a", Radiobutton, axes_conntrol + ".axes.axisa"),
-    ("axis_b", Radiobutton, axes_conntrol + ".axes.axisb"),
-    ("axis_c", Radiobutton, axes_conntrol + ".axes.axisc"),
-    ("axis_u", Radiobutton, axes_conntrol + ".axes.axisu"),
-    ("axis_v", Radiobutton, axes_conntrol + ".axes.axisv"),
-    ("axis_w", Radiobutton, axes_conntrol + ".axes.axisw"),
+    ("axes", Button, axes_conntrol + ".axes1"),
+    ("axis_x", Button, axes_conntrol + ".axes1.axisxbt"),
+    ("axis_y", Button, axes_conntrol + ".axes1.axisybt"),
+    ("axis_z", Button, axes_conntrol + ".axes1.axiszbt"),
+    ("axis_a", Button, axes_conntrol + ".axes1.axisabt"),
+    ("axis_b", Button, axes_conntrol + ".axes1.axisbbt"),
+    ("axis_c", Button, axes_conntrol + ".axes1.axiscbt"),
+    ("axis_u", Button, axes_conntrol + ".axes1.axisubt"),
+    ("axis_v", Button, axes_conntrol + ".axes1.axisvbt"),
+    ("axis_w", Button, axes_conntrol + ".axes1.axiswbt"),
 
     ("joints", Radiobutton, axes_conntrol + ".joints"),
     ("joint_0", Radiobutton, axes_conntrol + ".joints.joint0"),
@@ -2359,6 +2360,87 @@ class TclCommands(nf.TclCommands):
         if doHoming:
             ensure_mode(linuxcnc.MODE_MANUAL)
             c.home("xyzabcuvw".index(vars.current_axis.get()))
+
+    def home_axis_x(event=None):
+        if not manual_ok(): return
+        doHoming=True
+        if s.homed["xyzabcuvw".index("x")]:
+            doHoming=prompt_areyousure(_("Warning"),_("This axis is already homed, are you sure you want to re-home?"))
+        if doHoming:
+            ensure_mode(linuxcnc.MODE_MANUAL)
+            c.home("xyzabcuvw".index("x"))
+
+    def home_axis_y(event=None):
+        if not manual_ok(): return
+        doHoming=True
+        if s.homed["xyzabcuvw".index("y")]:
+            doHoming=prompt_areyousure(_("Warning"),_("This axis is already homed, are you sure you want to re-home?"))
+        if doHoming:
+            ensure_mode(linuxcnc.MODE_MANUAL)
+            c.home("xyzabcuvw".index("y"))
+
+    def home_axis_z(event=None):
+        if not manual_ok(): return
+        doHoming=True
+        if s.homed["xyzabcuvw".index("z")]:
+            doHoming=prompt_areyousure(_("Warning"),_("This axis is already homed, are you sure you want to re-home?"))
+        if doHoming:
+            ensure_mode(linuxcnc.MODE_MANUAL)
+            c.home("xyzabcuvw".index("z"))
+
+    def home_axis_a(event=None):
+        if not manual_ok(): return
+        doHoming=True
+        if s.homed["xyzabcuvw".index("a")]:
+            doHoming=prompt_areyousure(_("Warning"),_("This axis is already homed, are you sure you want to re-home?"))
+        if doHoming:
+            ensure_mode(linuxcnc.MODE_MANUAL)
+            c.home("xyzabcuvw".index("a"))
+
+    def home_axis_b(event=None):
+            if not manual_ok(): return
+            doHoming=True
+            if s.homed["xyzabcuvw".index("b")]:
+                doHoming=prompt_areyousure(_("Warning"),_("This axis is already homed, are you sure you want to re-home?"))
+            if doHoming:
+                ensure_mode(linuxcnc.MODE_MANUAL)
+                c.home("xyzabcuvw".index("b"))
+
+    def home_axis_c(event=None):
+            if not manual_ok(): return
+            doHoming=True
+            if s.homed["xyzabcuvw".index("c")]:
+                doHoming=prompt_areyousure(_("Warning"),_("This axis is already homed, are you sure you want to re-home?"))
+            if doHoming:
+                ensure_mode(linuxcnc.MODE_MANUAL)
+                c.home("xyzabcuvw".index("c"))
+
+    def home_axis_u(event=None):
+            if not manual_ok(): return
+            doHoming=True
+            if s.homed["xyzabcuvw".index("u")]:
+                doHoming=prompt_areyousure(_("Warning"),_("This axis is already homed, are you sure you want to re-home?"))
+            if doHoming:
+                ensure_mode(linuxcnc.MODE_MANUAL)
+                c.home("xyzabcuvw".index("u"))
+
+    def home_axis_v(event=None):
+            if not manual_ok(): return
+            doHoming=True
+            if s.homed["xyzabcuvw".index("v")]:
+                doHoming=prompt_areyousure(_("Warning"),_("This axis is already homed, are you sure you want to re-home?"))
+            if doHoming:
+                ensure_mode(linuxcnc.MODE_MANUAL)
+                c.home("xyzabcuvw".index("v"))
+
+    def home_axis_w(event=None):
+            if not manual_ok(): return
+            doHoming=True
+            if s.homed["xyzabcuvw".index("w")]:
+                doHoming=prompt_areyousure(_("Warning"),_("This axis is already homed, are you sure you want to re-home?"))
+            if doHoming:
+                ensure_mode(linuxcnc.MODE_MANUAL)
+                c.home("xyzabcuvw".index("w"))
 
     def unhome_axis(event=None):
         if not manual_ok(): return

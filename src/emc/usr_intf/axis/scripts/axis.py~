@@ -1175,7 +1175,8 @@ def open_file_guts(f, filtered=False, addrecent=True):
 tabs_mdi = str(root_window.tk.call("set", "_tabs_mdi"))
 tabs_manual = str(root_window.tk.call("set", "_tabs_manual"))
 tabs_preview = str(root_window.tk.call("set", "_tabs_preview"))
-#tabs_hung = str(root_window.tk.call("set", "_tabs_hung"))
+preview_frame = str(root_window.tk.call("set", "_preview_frame"))
+axes_conntrol = str(root_window.tk.call("set", "_axes_conntrol"))
 tabs_numbers = str(root_window.tk.call("set", "_tabs_numbers"))
 pane_top = str(root_window.tk.call("set", "pane_top"))
 pane_bottom = str(root_window.tk.call("set", "pane_bottom"))
@@ -1183,7 +1184,7 @@ widgets = nf.Widgets(root_window,
     ("help_window", Toplevel, ".keys"),
     ("about_window", Toplevel, ".about"),
     #("text", Text, pane_bottom + ".t.text"),
-    ("text", Text, tabs_manual + ".fr.text"),
+    ("text", Text, tabs_manual + ".gcode.text"),
     ("preview_frame", Frame, tabs_preview),
     ("numbers_text", Text, tabs_numbers + ".text"),
     ("tabs", bwidget.NoteBook, pane_top + ".tabs"),
@@ -1192,48 +1193,48 @@ widgets = nf.Widgets(root_window,
     ("mdi_command", Entry, tabs_mdi + ".command"),
     ("code_text", Text, tabs_mdi + ".gcodes"),
 
-    ("axes", Radiobutton, tabs_manual + ".axes"),
-    ("axis_x", Radiobutton, tabs_manual + ".axes.axisx"),
-    ("axis_y", Radiobutton, tabs_manual + ".axes.axisy"),
-    ("axis_z", Radiobutton, tabs_manual + ".axes.axisz"),
-    ("axis_a", Radiobutton, tabs_manual + ".axes.axisa"),
-    ("axis_b", Radiobutton, tabs_manual + ".axes.axisb"),
-    ("axis_c", Radiobutton, tabs_manual + ".axes.axisc"),
-    ("axis_u", Radiobutton, tabs_manual + ".axes.axisu"),
-    ("axis_v", Radiobutton, tabs_manual + ".axes.axisv"),
-    ("axis_w", Radiobutton, tabs_manual + ".axes.axisw"),
+    ("axes", Button, axes_conntrol + ".axes1"),
+    ("axis_x", Button, axes_conntrol + ".axes1.axisxbt"),
+    ("axis_y", Button, axes_conntrol + ".axes1.axisybt"),
+    ("axis_z", Button, axes_conntrol + ".axes1.axiszbt"),
+    ("axis_a", Button, axes_conntrol + ".axes1.axisabt"),
+    ("axis_b", Button, axes_conntrol + ".axes1.axisbbt"),
+    ("axis_c", Button, axes_conntrol + ".axes1.axiscbt"),
+    ("axis_u", Button, axes_conntrol + ".axes1.axisubt"),
+    ("axis_v", Button, axes_conntrol + ".axes1.axisvbt"),
+    ("axis_w", Button, axes_conntrol + ".axes1.axiswbt"),
 
-    ("joints", Radiobutton, tabs_manual + ".joints"),
-    ("joint_0", Radiobutton, tabs_manual + ".joints.joint0"),
-    ("joint_1", Radiobutton, tabs_manual + ".joints.joint1"),
-    ("joint_2", Radiobutton, tabs_manual + ".joints.joint2"),
-    ("joint_3", Radiobutton, tabs_manual + ".joints.joint3"),
-    ("joint_4", Radiobutton, tabs_manual + ".joints.joint4"),
-    ("joint_5", Radiobutton, tabs_manual + ".joints.joint5"),
-    ("joint_6", Radiobutton, tabs_manual + ".joints.joint6"),
-    ("joint_7", Radiobutton, tabs_manual + ".joints.joint7"),
-    ("joint_8", Radiobutton, tabs_manual + ".joints.joint8"),
-    ("joint_9", Radiobutton, tabs_manual + ".joints.joint9"),
+    ("joints", Radiobutton, axes_conntrol + ".joints"),
+    ("joint_0", Radiobutton, axes_conntrol + ".joints.joint0"),
+    ("joint_1", Radiobutton, axes_conntrol + ".joints.joint1"),
+    ("joint_2", Radiobutton, axes_conntrol + ".joints.joint2"),
+    ("joint_3", Radiobutton, axes_conntrol + ".joints.joint3"),
+    ("joint_4", Radiobutton, axes_conntrol + ".joints.joint4"),
+    ("joint_5", Radiobutton, axes_conntrol + ".joints.joint5"),
+    ("joint_6", Radiobutton, axes_conntrol + ".joints.joint6"),
+    ("joint_7", Radiobutton, axes_conntrol + ".joints.joint7"),
+    ("joint_8", Radiobutton, axes_conntrol + ".joints.joint8"),
+    ("joint_9", Radiobutton, axes_conntrol + ".joints.joint9"),
 
-    ("jogincr", Entry, tabs_manual + ".jogf.jog.jogincr"),
-    ("override", Checkbutton, tabs_manual + ".jogf.override"),
+    ("jogincr", Entry, axes_conntrol + ".jogf.jog.jogincr"),
+    ("override", Checkbutton, axes_conntrol + ".jogf.override"),
 
     ("ajogspeed", Entry, pane_top + ".ajogspeed"),
 
-    ("lubel", Label, tabs_manual + ".coolant"),
-    ("flood", Checkbutton, tabs_manual + ".flood"),
-    ("mist", Checkbutton, tabs_manual + ".mist"),
+    ("lubel", Label, axes_conntrol + ".coolant"),
+    ("flood", Checkbutton, axes_conntrol + ".flood"),
+    ("mist", Checkbutton, axes_conntrol + ".mist"),
 
-    ("brake", Checkbutton, tabs_manual + ".spindlef.brake"),
+    ("brake", Checkbutton, axes_conntrol + ".spindlef.brake"),
 
-    ("spindlel", Label, tabs_manual + ".spindlel"),
-    ("spindlef", Frame, tabs_manual + ".spindlef"),
-    ("spindle_ccw", Radiobutton, tabs_manual + ".spindlef.ccw"),
-    ("spindle_stop", Radiobutton, tabs_manual + ".spindlef.stop"),
-    ("spindle_cw", Radiobutton, tabs_manual + ".spindlef.cw"),
+    ("spindlel", Label, axes_conntrol + ".spindlel"),
+    ("spindlef", Frame, axes_conntrol + ".spindlef"),
+    ("spindle_ccw", Radiobutton, axes_conntrol + ".spindlef.ccw"),
+    ("spindle_stop", Radiobutton, axes_conntrol + ".spindlef.stop"),
+    ("spindle_cw", Radiobutton, axes_conntrol + ".spindlef.cw"),
 
-    ("spindle_minus", Button, tabs_manual + ".spindlef.spindleminus"),
-    ("spindle_plus", Button, tabs_manual + ".spindlef.spindleplus"),
+    ("spindle_minus", Button, axes_conntrol + ".spindlef.spindleminus"),
+    ("spindle_plus", Button, axes_conntrol + ".spindlef.spindleplus"),
 
     ("view_z", Button, ".toolbar.view_z"),
     ("view_z2", Button, ".toolbar.view_z2"),
@@ -1253,7 +1254,7 @@ widgets = nf.Widgets(root_window,
     ("menu_machine", Menu, ".menu.machine"),
     ("menu_touchoff", Menu, ".menu.machine.touchoff"),
 
-    ("homebutton", Button, tabs_manual + ".jogf.zerohome.home"),
+    ("homebutton", Button, axes_conntrol + ".jogf.zerohome.home"),
     ("homemenu", Menu, ".menu.machine.home"),
     ("unhomemenu", Menu, ".menu.machine.unhome")
 )
@@ -2359,6 +2360,87 @@ class TclCommands(nf.TclCommands):
         if doHoming:
             ensure_mode(linuxcnc.MODE_MANUAL)
             c.home("xyzabcuvw".index(vars.current_axis.get()))
+
+    def home_axis_x(event=None):
+        if not manual_ok(): return
+        doHoming=True
+        if s.homed["xyzabcuvw".index("x")]:
+            doHoming=prompt_areyousure(_("Warning"),_("This axis is already homed, are you sure you want to re-home?"))
+        if doHoming:
+            ensure_mode(linuxcnc.MODE_MANUAL)
+            c.home("xyzabcuvw".index("x"))
+
+    def home_axis_y(event=None):
+        if not manual_ok(): return
+        doHoming=True
+        if s.homed["xyzabcuvw".index("y")]:
+            doHoming=prompt_areyousure(_("Warning"),_("This axis is already homed, are you sure you want to re-home?"))
+        if doHoming:
+            ensure_mode(linuxcnc.MODE_MANUAL)
+            c.home("xyzabcuvw".index("y"))
+
+    def home_axis_z(event=None):
+        if not manual_ok(): return
+        doHoming=True
+        if s.homed["xyzabcuvw".index("z")]:
+            doHoming=prompt_areyousure(_("Warning"),_("This axis is already homed, are you sure you want to re-home?"))
+        if doHoming:
+            ensure_mode(linuxcnc.MODE_MANUAL)
+            c.home("xyzabcuvw".index("z"))
+
+    def home_axis_a(event=None):
+        if not manual_ok(): return
+        doHoming=True
+        if s.homed["xyzabcuvw".index("a")]:
+            doHoming=prompt_areyousure(_("Warning"),_("This axis is already homed, are you sure you want to re-home?"))
+        if doHoming:
+            ensure_mode(linuxcnc.MODE_MANUAL)
+            c.home("xyzabcuvw".index("a"))
+
+    def home_axis_b(event=None):
+            if not manual_ok(): return
+            doHoming=True
+            if s.homed["xyzabcuvw".index("b")]:
+                doHoming=prompt_areyousure(_("Warning"),_("This axis is already homed, are you sure you want to re-home?"))
+            if doHoming:
+                ensure_mode(linuxcnc.MODE_MANUAL)
+                c.home("xyzabcuvw".index("b"))
+
+    def home_axis_c(event=None):
+            if not manual_ok(): return
+            doHoming=True
+            if s.homed["xyzabcuvw".index("c")]:
+                doHoming=prompt_areyousure(_("Warning"),_("This axis is already homed, are you sure you want to re-home?"))
+            if doHoming:
+                ensure_mode(linuxcnc.MODE_MANUAL)
+                c.home("xyzabcuvw".index("c"))
+
+    def home_axis_u(event=None):
+            if not manual_ok(): return
+            doHoming=True
+            if s.homed["xyzabcuvw".index("u")]:
+                doHoming=prompt_areyousure(_("Warning"),_("This axis is already homed, are you sure you want to re-home?"))
+            if doHoming:
+                ensure_mode(linuxcnc.MODE_MANUAL)
+                c.home("xyzabcuvw".index("u"))
+
+    def home_axis_v(event=None):
+            if not manual_ok(): return
+            doHoming=True
+            if s.homed["xyzabcuvw".index("v")]:
+                doHoming=prompt_areyousure(_("Warning"),_("This axis is already homed, are you sure you want to re-home?"))
+            if doHoming:
+                ensure_mode(linuxcnc.MODE_MANUAL)
+                c.home("xyzabcuvw".index("v"))
+
+    def home_axis_w(event=None):
+            if not manual_ok(): return
+            doHoming=True
+            if s.homed["xyzabcuvw".index("w")]:
+                doHoming=prompt_areyousure(_("Warning"),_("This axis is already homed, are you sure you want to re-home?"))
+            if doHoming:
+                ensure_mode(linuxcnc.MODE_MANUAL)
+                c.home("xyzabcuvw".index("w"))
 
     def unhome_axis(event=None):
         if not manual_ok(): return
