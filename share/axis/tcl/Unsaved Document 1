@@ -1,0 +1,298 @@
+# Grid widget $_tabs_manual.axes.axisa
+grid $_tabs_manual.axes.axisu \
+	-column 0 \
+	-row 2 \
+	-padx 4
+
+# Grid widget $_tabs_manual.axes.axisb
+grid $_tabs_manual.axes.axisv \
+	-column 1 \
+	-row 2 \
+	-padx 4
+
+# Grid widget $_tabs_manual.axes.axisc
+grid $_tabs_manual.axes.axisw \
+	-column 2 \
+	-row 2 \
+	-padx 4
+
+
+# Grid widget $_tabs_manual.axes.axisa
+grid $_tabs_manual.axes.axisa \
+	-column 0 \
+	-row 1 \
+	-padx 4
+
+# Grid widget $_tabs_manual.axes.axisb
+grid $_tabs_manual.axes.axisb \
+	-column 1 \
+	-row 1 \
+	-padx 4
+
+# Grid widget $_tabs_manual.axes.axisc
+grid $_tabs_manual.axes.axisc \
+	-column 2 \
+	-row 1 \
+	-padx 4
+
+# Grid widget $_tabs_manual.axes.axisx
+grid $_tabs_manual.axes.axisx \
+	-column 0 \
+	-row 0 \
+	-padx 4
+
+# Grid widget $_tabs_manual.axes.axisy
+grid $_tabs_manual.axes.axisy \
+	-column 1 \
+	-row 0 \
+	-padx 4
+
+# Grid widget $_tabs_manual.axes.axisz
+grid $_tabs_manual.axes.axisz \
+	-column 2 \
+	-row 0 \
+	-padx 4
+????????????????????????????????????????
+# Grid widget $_tabs_manual.joints.joint0
+#grid $_tabs_manual.joints.joint0 \
+#	-column 0 \
+#	-row 0 \
+#	-padx 4
+#
+# Grid widget $_tabs_manual.joints.joint1
+#grid $_tabs_manual.joints.joint1 \
+#	-column 1 \
+#	-row 0 \
+#	-padx 4
+#
+# Grid widget $_tabs_manual.joints.joint2
+#grid $_tabs_manual.joints.joint2 \
+#	-column 2 \
+#	-row 0 \
+#	-padx 4
+#
+# Grid widget $_tabs_manual.joints.joint3
+#grid $_tabs_manual.joints.joint3 \
+#	-column 0 \
+#	-row 1 \
+#	-padx 4
+#
+# Grid widget $_tabs_manual.joints.joint4
+#grid $_tabs_manual.joints.joint4 \
+#	-column 1 \
+#	-row 1 \
+#	-padx 4
+#
+# Grid widget $_tabs_manual.joints.joint5
+#grid $_tabs_manual.joints.joint5 \
+#	-column 2 \
+#	-row 1 \
+#	-padx 4
+#
+## Grid widget $_tabs_manual.joints.joint6
+#grid $_tabs_manual.joints.joint6 \
+#	-column 0 \
+#	-row 2 \
+#	-padx 4
+#
+## Grid widget $_tabs_manual.joints.joint7
+#grid $_tabs_manual.joints.joint7 \
+#	-column 1 \
+#	-row 2 \
+#	-padx 4
+#
+## Grid widget $_tabs_manual.joints.joint8
+#grid $_tabs_manual.joints.joint8 \
+#	-column 2 \
+#	-row 2 \
+#	-padx 4
+#
+/////////////////////////////////////////////
+#grid $_tabs_manual.jogf.zerohome \
+#	-column 0 \
+#	-row 1 \
+#	-columnspan 3 \
+#	-sticky w
+#
+#grid $_tabs_manual.jogf.jog \
+#	-column 0 \
+#	-row 0 \
+#	-columnspan 3 \
+#	-sticky w
+#
+# Grid widget $_tabs_manual.jogf.zerohome.home
+#grid $_tabs_manual.jogf.zerohome.home \
+#	-column 0 \
+#	-row 0 \
+#	-ipadx 2 \
+#	-pady 2 \
+#	-sticky w
+#
+# Grid widget $_tabs_manual.jogf.zerohome.zero
+#grid $_tabs_manual.jogf.zerohome.zero \
+#	-column 1 \
+#	-row 0 \
+#	-ipadx 2 \
+#	-pady 2 \
+#	-sticky w
+#
+## Grid widget $_tabs_manual.jogf.zerohome.tooltouch
+#grid $_tabs_manual.jogf.zerohome.tooltouch \
+#	-column 1 \
+#	-row 2 \
+#	-ipadx 2 \
+#	-pady 2 \
+#	-sticky w
+#
+## Grid widget $_tabs_manual.jogf.override
+#grid $_tabs_manual.jogf.override \
+#	-column 0 \
+#	-row 3 \
+#	-columnspan 3 \
+#	-pady 2 \
+#	-sticky w
+#
+# Grid widget $_tabs_manual.jogf.jog.jogminus
+#grid $_tabs_manual.jogf.jog.jogminus \
+#	-column 0 \
+#	-row 0 \
+#	-pady 2 \
+#	-sticky nsw
+
+# Grid widget $_tabs_manual.jogf.jog.jogplus
+#grid $_tabs_manual.jogf.jog.jogplus \
+#	-column 1 \
+#	-row 0 \
+#	-pady 2 \
+#	-sticky nsw
+
+# Grid widget $_tabs_manual.jogf.jog.jogincr
+#grid $_tabs_manual.jogf.jog.jogincr \
+#	-column 2 \
+#	-row 0 \
+#	-pady 2 \
+#       -sticky nsw
+#
+/////////////////////////////////////////////
+# Grid widget $_tabs_manual.spindlef.brake
+#grid $_tabs_manual.spindlef.brake \
+#	-column 0 \
+#	-row 3 \
+#	-pady 2 \
+#	-sticky w
+
+#grid $_tabs_manual.spindlef.row1 -row 1 -column 0 -sticky nw
+#grid $_tabs_manual.spindlef.row2 -row 2 -column 0 -sticky nw
+#
+# Grid widget $_tabs_manual.spindlef.ccw
+#pack $_tabs_manual.spindlef.ccw  \
+#       -in $_tabs_manual.spindlef.row1 \
+#        -side left \
+#        -pady 2
+#
+# Grid widget $_tabs_manual.spindlef.stop
+#pack $_tabs_manual.spindlef.stop \
+#        -in $_tabs_manual.spindlef.row1 \
+#        -side left \
+#        -pady 2 \
+#        -ipadx 8
+#
+# Grid widget $_tabs_manual.spindlef.cw
+#pack $_tabs_manual.spindlef.cw \
+#        -in $_tabs_manual.spindlef.row1 \
+#        -side left \
+#        -pady 2
+#
+## Grid widget $_tabs_manual.spindlef.spindleminus
+#pack $_tabs_manual.spindlef.spindleminus \
+#        -in $_tabs_manual.spindlef.row2 \
+#       -side left \
+#        -pady 2
+#
+# Grid widget $_tabs_manual.spindlef.spindleplus
+#pack $_tabs_manual.spindlef.spindleplus \
+#        -in $_tabs_manual.spindlef.row2 \
+#        -side left \
+#        -pady 2
+#
+/////////////////////////////////////////////
+#grid rowconfigure $_tabs_manual 99 -weight 1
+#grid columnconfigure $_tabs_manual 99 -weight 1
+# Grid widget $_tabs_manual.axes
+#grid $_tabs_manual.axes \
+#	-column 1 \
+#	-row 0 \
+#	-padx 0 \
+#	-sticky w
+#
+# Grid widget $_tabs_manual.axis
+#grid $_tabs_manual.axis \
+	-column 0 \
+	-row 0 \
+	-pady 1 \
+	-sticky nw
+
+# Grid widget $_tabs_manual.coolant
+grid $_tabs_manual.coolant \
+	-column 0 \
+	-row 5 \
+	-sticky w
+
+# Grid widget $_tabs_manual.flood
+grid $_tabs_manual.flood \
+	-column 1 \
+	-row 6 \
+	-columnspan 2 \
+	-padx 4 \
+	-sticky w
+
+# Grid widget $_tabs_manual.jogf
+grid $_tabs_manual.jogf \
+	-column 1 \
+	-row 1 \
+	-padx 4 \
+	-sticky w
+
+# Grid widget $_tabs_manual.mist
+grid $_tabs_manual.mist \
+	-column 1 \
+	-row 5 \
+	-columnspan 2 \
+	-padx 4 \
+	-sticky w
+
+# Grid widget $_tabs_manual.space1
+grid $_tabs_manual.space1 \
+	-column 0 \
+	-row 2
+
+# Grid widget $_tabs_manual.space2
+grid $_tabs_manual.space2 \
+	-column 0 \
+	-row 4
+
+# Grid widget $_tabs_manual.spindlef
+grid $_tabs_manual.spindlef \
+	-column 1 \
+	-row 3 \
+	-padx 4 \
+	-sticky w
+
+# Grid widget $_tabs_manual.spindlel
+grid $_tabs_manual.spindlel \
+	-column 0 \
+	-row 3 \
+	-pady 2 \
+	-sticky nw
+/////////////////////////////////////////////
+
+/////////////////////////////////////////////
+
+/////////////////////////////////////////////
+
+/////////////////////////////////////////////
+
+/////////////////////////////////////////////
+
+/////////////////////////////////////////////
+
