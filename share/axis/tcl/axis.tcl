@@ -778,11 +778,11 @@ panedwindow .pane \
 
 set pane_top [frame .pane.top ]
 set pane_bottom [frame .pane.bottom ]
-.pane add $pane_top -sticky nsew
-.pane add $pane_bottom -sticky nsew
+#.pane add $pane_top -sticky nsew
+#.pane add $pane_bottom -sticky nsew
 catch {
-    .pane paneconfigure $pane_top -stretch always
-    .pane paneconfigure $pane_bottom -stretch never
+    #.pane paneconfigure $pane_top -stretch always
+    #.pane paneconfigure $pane_bottom -stretch never
 }
 
 NoteBook ${pane_top}.tabs \
@@ -806,7 +806,7 @@ after 1 after idle set_pane_minsize
 set _tabs_manual [${pane_top}.tabs insert end manual -text [_ "Manual Control \[F3\]"] -raisecmd {focus .; ensure_manual}]
 set _tabs_mdi [${pane_top}.tabs insert end mdi -text [_ "MDI \[F5\]"]]
 
-$_tabs_manual configure -borderwidth 2 -width 800
+$_tabs_manual configure -borderwidth 2 -width 800 -height 300
 $_tabs_mdi configure -borderwidth 2
 
 ${pane_top}.tabs itemconfigure mdi -raisecmd "[list focus ${_tabs_mdi}.command]; ensure_mdi"
@@ -851,14 +851,17 @@ grid $_tabs_manual.gcode -row 0 -column 0
 
 #tao frame cho phan hien thi cac truc
 
-set _axes_conntrol [frame $_tabs_manual.axes_control -borderwidth 2 -background red]
+set _axes_conntrol [frame $_tabs_manual.axes_control \
+        -borderwidth 2 \
+        -background gray \
+        -relief ridge ]
 grid $_tabs_manual.axes_control\
 	-column 1 \
 	-row 0 \
 	-sticky nesw \
 	-padx 2 \
 	-pady 2
-frame $_axes_conntrol.axis -borderwidth 2 -background blue
+frame $_axes_conntrol.axis -borderwidth 2
 label $_axes_conntrol.axis.label
 setup_widget_accel $_axes_conntrol.axis.label [_ Axis:]
 frame $_axes_conntrol.axes -borderwidth 2 -background gray
@@ -868,8 +871,10 @@ frame $_axes_conntrol.axes1 -borderwidth 2 -background gray
 # Grid widget $_tabs_manual.axis
 pack $_axes_conntrol.axis.label
 
-grid $_axes_conntrol.axis
-
+grid $_axes_conntrol.axis \
+        -column 0 \
+	-row 0 \
+	-padx 4
 
 
 grid $_axes_conntrol.axes1 \
@@ -887,7 +892,6 @@ grid $_axes_conntrol.axes1.axisxbt \
 	-column 0 \
 	-row 0 \
 	-padx 4
-bind <Key>{}
 button $_axes_conntrol.axes1.axisybt \
 	-padx 0 \
 	-width 7 \
@@ -967,8 +971,78 @@ grid $_axes_conntrol.axes1.axiswbt \
 	-column 0 \
 	-row 8 \
 	-padx 4
+#Tao Phan text de hien thi cac thong so
+label $_axes_conntrol.axes1.axisxtxt \
+	-width 25 -height 1 \
+        -textvariable settext
+grid $_axes_conntrol.axes1.axisxtxt \
+	-column 1 \
+	-row 0 \
+	-padx 4
 
+label $_axes_conntrol.axes1.axisytxt \
+	-width 25 -height 1 \
+        -textvariable settext
+grid $_axes_conntrol.axes1.axisytxt \
+	-column 1 \
+	-row 1 \
+	-padx 4
 
+label $_axes_conntrol.axes1.axisztxt \
+	-width 25 -height 1 \
+        -textvariable settext
+grid $_axes_conntrol.axes1.axisztxt \
+	-column 1 \
+	-row 2 \
+	-padx 4
+
+label $_axes_conntrol.axes1.axisatxt \
+	-width 25 -height 1 \
+        -textvariable settext
+grid $_axes_conntrol.axes1.axisatxt \
+	-column 1 \
+	-row 3 \
+	-padx 4
+
+label $_axes_conntrol.axes1.axisbtxt \
+	-width 25 -height 1 \
+        -textvariable settext
+grid $_axes_conntrol.axes1.axisbtxt \
+	-column 1 \
+	-row 4 \
+	-padx 4
+
+label $_axes_conntrol.axes1.axisctxt \
+	-width 25 -height 1 \
+        -textvariable settext
+grid $_axes_conntrol.axes1.axisctxt \
+	-column 1 \
+	-row 5 \
+	-padx 4
+
+label $_axes_conntrol.axes1.axisutxt \
+	-width 25 -height 1 \
+        -textvariable settext
+grid $_axes_conntrol.axes1.axisutxt \
+	-column 1 \
+	-row 6 \
+	-padx 4
+
+label $_axes_conntrol.axes1.axisvtxt \
+	-width 25 -height 1 \
+        -textvariable settext
+grid $_axes_conntrol.axes1.axisvtxt \
+	-column 1 \
+	-row 7 \
+	-padx 4
+
+label $_axes_conntrol.axes1.axiswtxt \
+	-width 25 -height 1 \
+        -textvariable settext
+grid $_axes_conntrol.axes1.axiswtxt \
+	-column 1 \
+	-row 8 \
+	-padx 4
 #ket thuc phan frame
 
 #tao preview de xem
@@ -980,7 +1054,7 @@ grid $_tabs_manual.preview_frame\
 	-padx 2 \
 	-pady 2
 #ket thuc phan tao preview
-radiobutton $_axes_conntrol.axes.axisx \
+radiobutton $_axes_conntrol.axes1.axisx \
 	-anchor w \
 	-padx 0 \
 	-value x \
@@ -989,7 +1063,7 @@ radiobutton $_axes_conntrol.axes.axisx \
         -text X \
         -command axis_activated
 
-radiobutton $_axes_conntrol.axes.axisy \
+radiobutton $_axes_conntrol.axes1.axisy \
 	-anchor w \
 	-padx 0 \
 	-value y \
@@ -998,7 +1072,7 @@ radiobutton $_axes_conntrol.axes.axisy \
         -text Y \
         -command axis_activated
 
-radiobutton $_axes_conntrol.axes.axisz \
+radiobutton $_axes_conntrol.axes1.axisz \
 	-anchor w \
 	-padx 0 \
 	-value z \
@@ -1007,7 +1081,7 @@ radiobutton $_axes_conntrol.axes.axisz \
         -text Z \
         -command axis_activated
 
-radiobutton $_axes_conntrol.axes.axisa \
+radiobutton $_axes_conntrol.axes1.axisa \
 	-anchor w \
 	-padx 0 \
 	-value a \
@@ -1016,7 +1090,7 @@ radiobutton $_axes_conntrol.axes.axisa \
         -text A \
         -command axis_activated
 
-radiobutton $_axes_conntrol.axes.axisb \
+radiobutton $_axes_conntrol.axes1.axisb \
 	-anchor w \
 	-padx 0 \
 	-value b \
@@ -1025,7 +1099,7 @@ radiobutton $_axes_conntrol.axes.axisb \
         -text B \
         -command axis_activated
 
-radiobutton $_axes_conntrol.axes.axisc \
+radiobutton $_axes_conntrol.axes1.axisc \
 	-anchor w \
 	-padx 0 \
 	-value c \
@@ -1035,7 +1109,7 @@ radiobutton $_axes_conntrol.axes.axisc \
         -command axis_activated
 
 
-radiobutton $_axes_conntrol.axes.axisu \
+radiobutton $_axes_conntrol.axes1.axisu \
 	-anchor w \
 	-padx 0 \
 	-value u \
@@ -1044,7 +1118,7 @@ radiobutton $_axes_conntrol.axes.axisu \
         -text U \
         -command axis_activated
 
-radiobutton $_axes_conntrol.axes.axisv \
+radiobutton $_axes_conntrol.axes1.axisv \
 	-anchor w \
 	-padx 0 \
 	-value v \
@@ -1053,7 +1127,7 @@ radiobutton $_axes_conntrol.axes.axisv \
         -text V \
         -command axis_activated
 
-radiobutton $_axes_conntrol.axes.axisw \
+radiobutton $_axes_conntrol.axes1.axisw \
 	-anchor w \
 	-padx 0 \
 	-value w \
@@ -1062,10 +1136,142 @@ radiobutton $_axes_conntrol.axes.axisw \
         -text W \
         -command axis_activated
 
-
+grid $_axes_conntrol.axes1.axisx \
+	-column 2 \
+	-row 0 \
+	-padx 4
+grid $_axes_conntrol.axes1.axisy \
+	-column 2 \
+	-row 1 \
+	-padx 4
+grid $_axes_conntrol.axes1.axisz \
+	-column 2 \
+	-row 2 \
+	-padx 4
+grid $_axes_conntrol.axes1.axisa \
+	-column 2 \
+	-row 3 \
+	-padx 4
+grid $_axes_conntrol.axes1.axisb \
+	-column 2 \
+	-row 4 \
+	-padx 4
+grid $_axes_conntrol.axes1.axisc \
+	-column 2 \
+	-row 5 \
+	-padx 4
+grid $_axes_conntrol.axes1.axisv \
+	-column 2 \
+	-row 6 \
+	-padx 4
+grid $_axes_conntrol.axes1.axisu \
+	-column 2 \
+	-row 7 \
+	-padx 4
+grid $_axes_conntrol.axes1.axisw \
+	-column 2 \
+	-row 8 \
+	-padx 4
 #...................................
+frame $_axes_conntrol.joint1s
 frame $_axes_conntrol.joints
+grid $_axes_conntrol.joint1s \
+	-column 0 \
+	-row 1 \
+	-padx 4
 
+button $_axes_conntrol.joint1s.joint0 \
+	-padx 0 \
+	-width 7 \
+        -text "Joint 0" \
+        -command home_axis_x
+        
+grid $_axes_conntrol.joint1s.joint0 \
+	-column 0 \
+	-row 0 \
+	-padx 4
+button $_axes_conntrol.joint1s.joint1 \
+	-padx 0 \
+	-width 7 \
+        -text "Joint 1" \
+        -command home_axis_y
+grid $_axes_conntrol.joint1s.joint1 \
+	-column 0 \
+	-row 1 \
+	-padx 4
+
+button $_axes_conntrol.joint1s.joint2 \
+	-padx 0 \
+	-width 7 \
+        -text "Joint 2" \
+        -command home_axis_z
+grid $_axes_conntrol.joint1s.joint2 \
+	-column 0 \
+	-row 2 \
+	-padx 4
+
+button $_axes_conntrol.joint1s.joint3 \
+	-padx 0 \
+	-width 7 \
+        -text "Joint 3" \
+        -command home_axis_a
+grid $_axes_conntrol.joint1s.joint3 \
+	-column 0 \
+	-row 3 \
+	-padx 4
+
+button $_axes_conntrol.joint1s.joint4 \
+	-padx 0 \
+	-width 7 \
+        -text "Joint 4" \
+        -command home_axis_b
+grid $_axes_conntrol.joint1s.joint4 \
+	-column 0 \
+	-row 4 \
+	-padx 4
+
+button $_axes_conntrol.joint1s.joint5 \
+	-padx 0 \
+	-width 7 \
+        -text "Joint 5" \
+        -command home_axis_c
+grid $_axes_conntrol.joint1s.joint5 \
+	-column 0 \
+	-row 5 \
+	-padx 4
+
+button $_axes_conntrol.joint1s.joint6 \
+	-padx 0 \
+	-width 7 \
+        -text "Joint 6" \
+        -command home_axis_u
+grid $_axes_conntrol.joint1s.joint6 \
+	-column 0 \
+	-row 6\
+	-padx 4
+
+button $_axes_conntrol.joint1s.joint7 \
+	-padx 0 \
+	-width 7 \
+        -text "Joint 7" \
+        -command home_axis_v
+grid $_axes_conntrol.joint1s.joint7 \
+	-column 0 \
+	-row 7 \
+	-padx 4
+
+button $_axes_conntrol.joint1s.joint8 \
+	-padx 0 \
+	-width 7 \
+        -text "Joint 8" \
+        -command home_axis_w
+grid $_axes_conntrol.joint1s.joint8 \
+	-column 0 \
+	-row 8 \
+	-padx 4
+
+
+#ket thuc phan frame
 radiobutton $_axes_conntrol.joints.joint0 \
 	-anchor w \
 	-padx 0 \
@@ -1150,6 +1356,10 @@ radiobutton $_axes_conntrol.joints.joint8 \
 #tao frame cho phan hien thi cac truc
 #..........................
 frame $_axes_conntrol.jogf
+grid $_axes_conntrol.jogf \
+	-column 0 \
+	-row 2 \
+	-padx 4
 frame $_axes_conntrol.jogf.jog
 
 button $_axes_conntrol.jogf.jog.jogminus \
@@ -1211,8 +1421,75 @@ checkbutton $_axes_conntrol.jogf.override \
 	-variable override_limits
 setup_widget_accel $_axes_conntrol.jogf.override [_ "Override Limits"]
 
+grid $_axes_conntrol.jogf.zerohome \
+	-column 0 \
+	-row 1 \
+	-columnspan 3 \
+	-sticky w
+
+grid $_axes_conntrol.jogf.jog \
+	-column 0 \
+	-row 0 \
+	-columnspan 3 \
+	-sticky w
+
+# Grid widget $_axes_conntrol.jogf.zerohome.home
+grid $_axes_conntrol.jogf.zerohome.home \
+	-column 0 \
+	-row 0 \
+	-ipadx 2 \
+	-pady 2 \
+	-sticky w
+
+# Grid widget $_axes_conntrol.jogf.zerohome.zero
+grid $_axes_conntrol.jogf.zerohome.zero \
+	-column 1 \
+	-row 0 \
+	-ipadx 2 \
+	-pady 2 \
+	-sticky w
+
+# Grid widget $_axes_conntrol.jogf.zerohome.tooltouch
+grid $_axes_conntrol.jogf.zerohome.tooltouch \
+	-column 1 \
+	-row 2 \
+	-ipadx 2 \
+	-pady 2 \
+	-sticky w
+
+# Grid widget $_axes_conntrol.jogf.override
+grid $_axes_conntrol.jogf.override \
+	-column 0 \
+	-row 3 \
+	-columnspan 3 \
+	-pady 2 \
+	-sticky w
+
+# Grid widget $_axes_conntrol.jogf.jog.jogminus
+grid $_axes_conntrol.jogf.jog.jogminus \
+	-column 0 \
+	-row 0 \
+	-pady 2 \
+	-sticky nsw
+
+# Grid widget $_axes_conntrol.jogf.jog.jogplus
+grid $_axes_conntrol.jogf.jog.jogplus \
+	-column 1 \
+	-row 0 \
+	-pady 2 \
+	-sticky nsw
+
+# Grid widget $_axes_conntrol.jogf.jog.jogincr
+grid $_axes_conntrol.jogf.jog.jogincr \
+	-column 2 \
+	-row 0 \
+	-pady 2 \
+       -sticky nsw
+
+
+
 #...................................
-vspace $_tabs_manual.space1 \
+vspace $_axes_conntrol.space1 \
 	-height 12
 
 label $_axes_conntrol.spindlel
@@ -1306,8 +1583,8 @@ setup_widget_accel $_axes_conntrol.flood [_ Flood]
 label $_tabs_mdi.historyl
 setup_widget_accel $_tabs_mdi.historyl [_ History:]
 
-#pack $_tabs_manual.sb -side right -fill y
-#pack $_tabs_manual.text -side left -fill both -expand true
+#pack $_axes_conntrol.sb -side right -fill y
+#pack $_axes_conntrol.text -side left -fill both -expand true
 
 label $_tabs_mdi.commandl
 setup_widget_accel $_tabs_mdi.commandl [_ "MDI Command:"]
@@ -1433,7 +1710,7 @@ text ${_tabs_numbers}.text -width 1 -height 1 -wrap none \
 	-background [systembuttonface] \
 	-borderwidth 0 \
 	-relief flat
-pack ${_tabs_numbers}.text -fill both -expand 1
+pack ${_tabs_numbers}.text -fill both -expand 0
 bindtags ${_tabs_numbers}.text [list ${_tabs_numbers}.text . all]
 
 frame .info
@@ -1441,7 +1718,7 @@ frame .info
 label .info.task_state \
 	-anchor w \
 	-borderwidth 2 \
-	-relief sunken \
+	-relief ridge \
 	-textvariable task_state_string \
 	-width 14
 setup_widget_accel .info.task_state {}
@@ -1449,21 +1726,21 @@ setup_widget_accel .info.task_state {}
 label .info.tool \
 	-anchor w \
 	-borderwidth 2 \
-	-relief sunken \
+	-relief ridge \
 	-textvariable tool \
 	-width 30
 
 label .info.offset \
 	-anchor w \
 	-borderwidth 2 \
-	-relief sunken \
+	-relief ridge \
 	-textvariable offset \
 	-width 25
 
 label .info.position \
 	-anchor w \
 	-borderwidth 2 \
-	-relief sunken \
+	-relief ridge \
 	-textvariable position \
 	-width 25
 
@@ -1478,59 +1755,220 @@ pack .info.tool \
 # Pack widget .info.position
 pack .info.position \
 	-side left
-
-frame ${pane_bottom}.t \
+#_________________________________Phan tao run/start/stop on bottom
+set frame_control [frame ${pane_bottom}.control \
 	-borderwidth 2 \
-	-relief sunken \
-	-highlightthickness 1
+	-relief ridge \
+	-highlightthickness 1 \
+        -background blue ]
+
+grid ${frame_control}\
+	-column 0 \
+	-row 0 \
+	-sticky nesw
+
+Button ${frame_control}.program_run \
+	-command task_run \
+	-helptext [_ "Begin executing current file \[R\]"] \
+	-relief raised \
+        -text "Start" \
+        -width 5 \
+        -height 2 \
+	-takefocus 0
+setup_widget_accel ${frame_control}.program_run [_ "Start"]
+
+Button ${frame_control}.program_step \
+	-command task_step \
+	-helptext [_ "Execute next line \[T\]"] \
+        -text "Step" \
+	-relief raised \
+        -width 5 \
+        -height 2 \
+	-takefocus 0
+setup_widget_accel ${frame_control}.program_step [_ "Step"]
+
+Button ${frame_control}.program_pause \
+	-command task_pauseresume \
+	-helptext [_ "Pause \[P\] / resume \[S\] execution"] \
+	-relief raised \
+        -width 5 \
+        -height 2 \
+	-takefocus 0
+setup_widget_accel ${frame_control}.program_pause [_ "Pause"]
+
+Button ${frame_control}.program_stop \
+	-command task_stop \
+	-helptext [_ "Stop program execution \[ESC\]"] \
+	-relief raised \
+        -width 5 \
+        -height 2 \
+	-takefocus 0
+setup_widget_accel ${frame_control}.program_stop [_ "Stop"]
+
+grid ${frame_control}.program_run \
+        -padx 10 \
+        -pady 1
+grid ${frame_control}.program_step \
+	-column 0 \
+        -padx 10 \
+        -pady 1 \
+	-row 1  \
+	-sticky nesw  
+grid ${frame_control}.program_pause \
+	-column 0 \
+	-row 2 \
+        -padx 10 \
+        -pady 1 \
+	-sticky nesw 
+grid ${frame_control}.program_stop \
+	-column 0 \
+        -padx 10 \
+        -pady 1 \
+	-row 3 \
+	-sticky nesw 
+
+#_________________________________Ket thuc phan tao run/start/stop on bottom
+
+#_________________________________Phan tao edit gcode
+set frame_gcode [frame ${pane_bottom}.gcode \
+	-borderwidth 2 \
+	-relief ridge \
+	-highlightthickness 1 \
+        -background red ]
+
+grid ${frame_gcode}\
+	-column 1 \
+	-row 0
 
 
-frame ${pane_top}.ajogspeed
-label ${pane_top}.ajogspeed.l0 -text [_ "Jog Speed:"]
-label ${pane_top}.ajogspeed.l1
-scale ${pane_top}.ajogspeed.s -bigincrement 0 -from .06 -to 1 -resolution .020 -showvalue 0 -variable ajog_slider_val -command update_ajog_slider_vel -orient h -takefocus 0
-label ${pane_top}.ajogspeed.l -textv jog_aspeed -width 6 -anchor e
-pack ${pane_top}.ajogspeed.l0 -side left
-pack ${pane_top}.ajogspeed.l -side left
-pack ${pane_top}.ajogspeed.l1 -side left
-pack ${pane_top}.ajogspeed.s -side right
-bind . <less> [regsub %W [bind Scale <Left>] ${pane_top}.ajogspeed.s]
-bind . <greater> [regsub %W [bind Scale <Right>] ${pane_top}.ajogspeed.s]
+Button ${frame_gcode}.program_run \
+	-command task_run \
+	-helptext [_ "Begin executing current file \[R\]"] \
+	-relief raised \
+        -text "Start" \
+        -width 10 \
+        -height 2 \
+	-takefocus 0
+setup_widget_accel ${frame_gcode}.program_run [_ "Edit G Code"]
+
+Button ${frame_gcode}.program_step \
+	-command task_step \
+	-helptext [_ "Execute next line \[T\]"] \
+        -text "Step" \
+	-relief raised \
+        -width 10 \
+        -height 2 \
+	-takefocus 0
+setup_widget_accel ${frame_gcode}.program_step [_ "Close G Code"]
+
+Button ${frame_gcode}.program_pause \
+	-command task_pauseresume \
+	-helptext [_ "Pause \[P\] / resume \[S\] execution"] \
+	-relief raised \
+        -width 5 \
+        -height 2 \
+	-takefocus 0
+setup_widget_accel ${frame_gcode}.program_pause [_ "............"]
+
+Button ${frame_gcode}.program_stop \
+	-command task_stop \
+	-helptext [_ "Stop program execution \[ESC\]"] \
+	-relief raised \
+        -width 5 \
+        -height 2 \
+	-takefocus 0
+setup_widget_accel ${frame_gcode}.program_stop [_ "............"]
+
+grid ${frame_gcode}.program_run \
+        -padx 10 \
+        -pady 1
+grid ${frame_gcode}.program_step \
+	-column 0 \
+	-row 1 \
+        -padx 10 \
+        -pady 1 \
+	-sticky nesw  
+grid ${frame_gcode}.program_pause \
+	-column 0 \
+	-row 2 \
+        -padx 10 \
+        -pady 1 \
+	-sticky nesw 
+grid ${frame_gcode}.program_stop \
+	-column 0 \
+        -padx 10 \
+        -pady 1 \
+	-row 3 \
+	-sticky nesw 
+
+#_________________________________Ket thuc phan edit gcode
+
+set frame_setting [frame ${pane_bottom}.setting \
+        -borderwidth 2 \
+	-relief ridge \
+	-highlightthickness 1 \
+        -background green ]
+
+grid ${frame_setting} \
+	-column 2 \
+	-row 0 \
+	-sticky nesw 
+
+frame ${frame_setting}.ajogspeed
+grid ${frame_setting}.ajogspeed \
+	-column 2 \
+	-row 0 \
+	-sticky nesw
+
+label ${frame_setting}.ajogspeed.l0 -text [_ "Jog Speed:"]
+label ${frame_setting}.ajogspeed.l1
+scale ${frame_setting}.ajogspeed.s -bigincrement 0 -from .06 -to 1 -resolution .020 -showvalue 0 -variable ajog_slider_val -command update_ajog_slider_vel -orient h -takefocus 0
+label ${frame_setting}.ajogspeed.l -textv jog_aspeed -width 6 -anchor e
+pack ${frame_setting}.ajogspeed.l0 -side left -padx 10
+pack ${frame_setting}.ajogspeed.l -side left
+pack ${frame_setting}.ajogspeed.l1 -side left
+pack ${frame_setting}.ajogspeed.s -side right
+bind . <less> [regsub %W [bind Scale <Left>] ${frame_setting}.ajogspeed.s]
+bind . <greater> [regsub %W [bind Scale <Right>] ${frame_setting}.ajogspeed.s]
 
 
-frame ${pane_top}.jogspeed
-label ${pane_top}.jogspeed.l0 -text [_ "Jog Speed:"]
-label ${pane_top}.jogspeed.l1
-scale ${pane_top}.jogspeed.s -bigincrement 0 -from .06 -to 1 -resolution .020 -showvalue 0 -variable jog_slider_val -command update_jog_slider_vel -orient h -takefocus 0
-label ${pane_top}.jogspeed.l -textv jog_speed -width 6 -anchor e
-pack ${pane_top}.jogspeed.l0 -side left
-pack ${pane_top}.jogspeed.l -side left
-pack ${pane_top}.jogspeed.l1 -side left
-pack ${pane_top}.jogspeed.s -side right
-bind . , [regsub %W [bind Scale <Left>] ${pane_top}.jogspeed.s]
-bind . . [regsub %W [bind Scale <Right>] ${pane_top}.jogspeed.s]
+frame ${frame_setting}.jogspeed
+label ${frame_setting}.jogspeed.l0 -text [_ "Jog Speed:"]
+label ${frame_setting}.jogspeed.l1
+scale ${frame_setting}.jogspeed.s -bigincrement 0 -from .06 -to 1 -resolution .020 -showvalue 0 -variable jog_slider_val -command update_jog_slider_vel -orient h -takefocus 0
+label ${frame_setting}.jogspeed.l -textv jog_speed -width 6 -anchor e
+pack ${frame_setting}.jogspeed.l0 -side left -padx 10
+pack ${frame_setting}.jogspeed.s -side right
+pack ${frame_setting}.jogspeed.l1 -side right
+pack ${frame_setting}.jogspeed.l -side right
 
-frame ${pane_top}.maxvel
-label ${pane_top}.maxvel.l0 -text [_ "Max Velocity:"]
-label ${pane_top}.maxvel.l1
-scale ${pane_top}.maxvel.s -bigincrement 0 -from .06 -to 1 -resolution .020 -showvalue 0 -variable maxvel_slider_val -command update_maxvel_slider_vel -orient h -takefocus 0
-label ${pane_top}.maxvel.l -textv maxvel_speed -width 6 -anchor e
-pack ${pane_top}.maxvel.l0 -side left
-pack ${pane_top}.maxvel.l -side left
-pack ${pane_top}.maxvel.l1 -side left
-pack ${pane_top}.maxvel.s -side right
-bind . <semicolon> [regsub %W [bind Scale <Left>] ${pane_top}.maxvel.s]
-bind . ' [regsub %W [bind Scale <Right>] ${pane_top}.maxvel.s]
 
-frame ${pane_top}.spinoverride
+bind . , [regsub %W [bind Scale <Left>] ${frame_setting}.jogspeed.s]
+bind . . [regsub %W [bind Scale <Right>] ${frame_setting}.jogspeed.s]
 
-label ${pane_top}.spinoverride.foentry \
+frame ${frame_setting}.maxvel
+label ${frame_setting}.maxvel.l0 -text [_ "Max Velocity:"]
+label ${frame_setting}.maxvel.l1
+scale ${frame_setting}.maxvel.s -bigincrement 0 -from .06 -to 1 -resolution .020 -showvalue 0 -variable maxvel_slider_val -command update_maxvel_slider_vel -orient h -takefocus 0
+label ${frame_setting}.maxvel.l -textv maxvel_speed -width 6 -anchor e
+pack ${frame_setting}.maxvel.l0 -side left -padx 10
+pack ${frame_setting}.maxvel.s -side right
+pack ${frame_setting}.maxvel.l1 -side right
+pack ${frame_setting}.maxvel.l -side right
+
+
+bind . <semicolon> [regsub %W [bind Scale <Left>] ${frame_setting}.maxvel.s]
+bind . ' [regsub %W [bind Scale <Right>] ${frame_setting}.maxvel.s]
+
+frame ${frame_setting}.spinoverride
+
+label ${frame_setting}.spinoverride.foentry \
 	-textvariable spindlerate \
 	-width 3 \
         -anchor e
-setup_widget_accel ${pane_top}.spinoverride.foentry 0
+setup_widget_accel ${frame_setting}.spinoverride.foentry 0
 
-scale ${pane_top}.spinoverride.foscale \
+scale ${frame_setting}.spinoverride.foscale \
 	-command set_spindlerate \
 	-orient horizontal \
 	-resolution 1.0 \
@@ -1539,38 +1977,34 @@ scale ${pane_top}.spinoverride.foscale \
 	-to 120.0 \
 	-variable spindlerate
 
-label ${pane_top}.spinoverride.l
-setup_widget_accel ${pane_top}.spinoverride.l [_ "Spindle Override:"]
-label ${pane_top}.spinoverride.m -width 1
-setup_widget_accel ${pane_top}.spinoverride.m [_ "%"]
+label ${frame_setting}.spinoverride.l
+setup_widget_accel ${frame_setting}.spinoverride.l [_ "Spindle Override:"]
+label ${frame_setting}.spinoverride.m -width 1
+setup_widget_accel ${frame_setting}.spinoverride.m [_ "%"]
 
-# Pack widget ${pane_top}.spinoverride.l
-pack ${pane_top}.spinoverride.l \
-	-side left
+# Pack widget ${frame_setting}.spinoverride.l
+pack ${frame_setting}.spinoverride.l -side left -padx 10
 
-# Pack widget ${pane_top}.spinoverride.foscale
-pack ${pane_top}.spinoverride.foscale \
-	-side right
+# Pack widget ${frame_setting}.spinoverride.foscale
+pack ${frame_setting}.spinoverride.foscale -side right
 
-# Pack widget ${pane_top}.spinoverride.foentry
-pack ${pane_top}.spinoverride.m \
-	-side right
+# Pack widget ${frame_setting}.spinoverride.foentry
+pack ${frame_setting}.spinoverride.m -side right
 
-# Pack widget ${pane_top}.spinoverride.foentry
-pack ${pane_top}.spinoverride.foentry \
-	-side right
+# Pack widget ${frame_setting}.spinoverride.foentry
+pack ${frame_setting}.spinoverride.foentry -side right
 
 
 
-frame ${pane_top}.feedoverride
+frame ${frame_setting}.feedoverride
 
-label ${pane_top}.feedoverride.foentry \
+label ${frame_setting}.feedoverride.foentry \
 	-textvariable feedrate \
 	-width 4 \
         -anchor e
-setup_widget_accel ${pane_top}.feedoverride.foentry 0
+setup_widget_accel ${frame_setting}.feedoverride.foentry 0
 
-scale ${pane_top}.feedoverride.foscale \
+scale ${frame_setting}.feedoverride.foscale \
 	-command set_feedrate \
 	-orient horizontal \
 	-resolution 1.0 \
@@ -1579,36 +2013,32 @@ scale ${pane_top}.feedoverride.foscale \
 	-to 120.0 \
 	-variable feedrate
 
-label ${pane_top}.feedoverride.l
-setup_widget_accel ${pane_top}.feedoverride.l [_ "Feed Override:"]
-label ${pane_top}.feedoverride.m -width 1
-setup_widget_accel ${pane_top}.feedoverride.m [_ "%"]
+label ${frame_setting}.feedoverride.l
+setup_widget_accel ${frame_setting}.feedoverride.l [_ "Feed Override:"]
+label ${frame_setting}.feedoverride.m -width 1
+setup_widget_accel ${frame_setting}.feedoverride.m [_ "%"]
 
-# Pack widget ${pane_top}.feedoverride.l
-pack ${pane_top}.feedoverride.l \
-	-side left
+# Pack widget ${frame_setting}.feedoverride.l
+pack ${frame_setting}.feedoverride.l -side left -padx 10
 
-# Pack widget ${pane_top}.feedoverride.foscale
-pack ${pane_top}.feedoverride.foscale \
-	-side right
+# Pack widget ${frame_setting}.feedoverride.foscale
+pack ${frame_setting}.feedoverride.foscale -side right
 
-# Pack widget ${pane_top}.feedoverride.foentry
-pack ${pane_top}.feedoverride.m \
-	-side right
+# Pack widget ${frame_setting}.feedoverride.foentry
+pack ${frame_setting}.feedoverride.m \-side right
 
-# Pack widget ${pane_top}.feedoverride.foentry
-pack ${pane_top}.feedoverride.foentry \
-	-side right
+# Pack widget ${frame_setting}.feedoverride.foentry
+pack ${frame_setting}.feedoverride.foentry -side right
 
-frame ${pane_top}.rapidoverride
+frame ${frame_setting}.rapidoverride
 
-label ${pane_top}.rapidoverride.foentry \
+label ${frame_setting}.rapidoverride.foentry \
 	-textvariable rapidrate \
 	-width 4 \
         -anchor e
-setup_widget_accel ${pane_top}.rapidoverride.foentry 0
+setup_widget_accel ${frame_setting}.rapidoverride.foentry 0
 
-scale ${pane_top}.rapidoverride.foscale \
+scale ${frame_setting}.rapidoverride.foscale \
 	-command set_rapidrate \
 	-orient horizontal \
 	-resolution 1.0 \
@@ -1617,26 +2047,22 @@ scale ${pane_top}.rapidoverride.foscale \
 	-to 120.0 \
 	-variable rapidrate
 
-label ${pane_top}.rapidoverride.l
-setup_widget_accel ${pane_top}.rapidoverride.l [_ "Rapid Override:"]
-label ${pane_top}.rapidoverride.m -width 1
-setup_widget_accel ${pane_top}.rapidoverride.m [_ "%"]
+label ${frame_setting}.rapidoverride.l
+setup_widget_accel ${frame_setting}.rapidoverride.l [_ "Rapid Override:"]
+label ${frame_setting}.rapidoverride.m -width 1
+setup_widget_accel ${frame_setting}.rapidoverride.m [_ "%"]
 
-# Pack widget ${pane_top}.rapidoverride.l
-pack ${pane_top}.rapidoverride.l \
-	-side left
+# Pack widget ${frame_setting}.rapidoverride.l
+pack ${frame_setting}.rapidoverride.l -side left -padx 10
 
-# Pack widget ${pane_top}.rapidoverride.foscale
-pack ${pane_top}.rapidoverride.foscale \
-	-side right
+# Pack widget ${frame_setting}.rapidoverride.foscale
+pack ${frame_setting}.rapidoverride.foscale -side right
 
-# Pack widget ${pane_top}.rapidoverride.foentry
-pack ${pane_top}.rapidoverride.m \
-	-side right
+# Pack widget ${frame_setting}.rapidoverride.foentry
+pack ${frame_setting}.rapidoverride.m -side right
 
-# Pack widget ${pane_top}.rapidoverride.foentry
-pack ${pane_top}.rapidoverride.foentry \
-	-side right
+# Pack widget ${frame_setting}.rapidoverride.foentry
+pack ${frame_setting}.rapidoverride.foentry -side right
 
 toplevel .about
 bind .about <Key-Return> { wm wi .about }
@@ -1723,38 +2149,23 @@ wm resiz .keys 0 0
 wm minsize .keys 1 1
 wm protocol .keys WM_DELETE_WINDOW {wm wi .keys}
 
-# Grid widget ${pane_top}.feedoverride
-grid ${pane_top}.feedoverride \
+# Grid widget ${frame_setting}.feedoverride
+grid ${frame_setting}.feedoverride \
 	-column 0 \
 	-row 2 \
 	-sticky new
 
-# Grid widget ${pane_top}.rapidoverride
-grid ${pane_top}.rapidoverride \
+# Grid widget ${frame_setting}.rapidoverride
+grid ${frame_setting}.rapidoverride \
 	-column 0 \
 	-row 3 \
 	-sticky new
 
-# Grid widget ${pane_top}.spinoverride
-grid ${pane_top}.spinoverride \
-	-column 0 \
-	-row 4 \
-	-sticky new
-
-grid ${pane_top}.jogspeed \
-	-column 0 \
-	-row 5 \
-	-sticky new
-
-grid ${pane_top}.ajogspeed \
-	-column 0 \
-	-row 6 \
-	-sticky new
-
-grid ${pane_top}.maxvel \
-	-column 0 \
-	-row 7 \
-	-sticky new
+#grid widget ${frame_setting}.spinoverride
+grid ${frame_setting}.spinoverride -column 0 -row 4 -sticky new
+grid ${frame_setting}.jogspeed -column 0 -row 5 -sticky new
+grid ${frame_setting}.ajogspeed -column 0 -row 6 -sticky new
+grid ${frame_setting}.maxvel -column 0 -row 7 -sticky new
 
 # Grid widget .info
 grid .info \
@@ -1763,7 +2174,7 @@ grid .info \
 	-columnspan 2 \
 	-sticky ew
 
-# Grid widget ${pane_top}.right
+# Grid widget ${frame_setting}.right
 #grid ${pane_top}.right \
 #	-column 2 \
 #	-row 1 \
@@ -1778,14 +2189,11 @@ grid ${pane_top}.tabs \
 	-sticky nesw \
 	-padx 2 \
 	-pady 2
-grid rowconfigure ${pane_top} 1 -weight 1
-grid columnconfigure ${pane_top} 1 -weight 1
-grid ${pane_bottom}.t \
-	-column 1 \
-	-row 1 \
-	-sticky nesw
-grid rowconfigure ${pane_bottom} 1 -weight 1
-grid columnconfigure ${pane_bottom} 1 -weight 1
+#grid rowconfigure ${pane_top} 1 -weight 1
+#grid columnconfigure ${pane_top} 1 -weight 1
+
+#grid rowconfigure ${pane_bottom} 1 -weight 1
+#grid columnconfigure ${pane_bottom} 1 -weight 1
 
 grid .pane -column 0 -row 1 -sticky nsew -rowspan 2
 
@@ -2003,12 +2411,12 @@ proc set_mode_from_tab {} {
 
 proc joint_mode_switch {args} {
     if {$::motion_mode == $::TRAJ_MODE_FREE && $::kinematics_type != $::KINEMATICS_IDENTITY} {
-        grid forget $::_axes_conntrol.axes
-        grid $::_axes_conntrol.joints -column 1 -row 0 -padx 0 -pady 0 -sticky w
+        grid forget $::_axes_conntrol.axes1
+        grid $::_axes_conntrol.joint1s -padx 0 -pady 0 -sticky w
         setup_widget_accel $::_axes_conntrol.axis.label [_ Joint:]
     } else {
-        grid forget $::_axes_conntrol.joints
-        grid $::_axes_conntrol.axes -column 1 -row 0 -padx 0 -pady 0 -sticky w
+        grid forget $::_axes_conntrol.joint1s
+        grid $::_axes_conntrol.axes1 -padx 0 -pady 0 -sticky w
         setup_widget_accel $::_axes_conntrol.axis.label [_ Axis:]
     }    
 }
@@ -2228,15 +2636,15 @@ proc val2vel_show {val maxvel} {
 }
 
 proc set_slider_min {minval} {
-    global pane_top
+    global frame_setting
     global max_speed
-    ${pane_top}.jogspeed.s configure -from [setval $minval $max_speed]
+    ${frame_setting}.jogspeed.s configure -from [setval $minval $max_speed]
 }
 
 proc set_aslider_min {minval} {
-    global pane_top
+    global frame_setting
     global max_aspeed
-    ${pane_top}.ajogspeed.s configure -from [setval $minval $max_aspeed]
+    ${frame_setting}.ajogspeed.s configure -from [setval $minval $max_aspeed]
 }
 
 proc update_jog_slider_vel {newval} {
@@ -2268,11 +2676,11 @@ proc update_maxvel_slider {} {
 
 proc update_units {args} {
     if {$::metric} {
-        ${::pane_top}.jogspeed.l1 configure -text mm/min
-        ${::pane_top}.maxvel.l1 configure -text mm/min
+        ${::frame_setting}.jogspeed.l1 configure -text mm/min
+        ${::frame_setting}.maxvel.l1 configure -text mm/min
     } else {
-        ${::pane_top}.jogspeed.l1 configure -text in/min
-        ${::pane_top}.maxvel.l1 configure -text in/min
+        ${::frame_setting}.jogspeed.l1 configure -text in/min
+        ${::frame_setting}.maxvel.l1 configure -text in/min
     }
     update_jog_slider_vel $::jog_slider_val
     update_maxvel_slider_vel $::maxvel_slider_val
@@ -2325,12 +2733,12 @@ DynamicHelp::add $_axes_conntrol.mist -text [_ "Turn mist on or off \[F7\]"]
 DynamicHelp::add $_axes_conntrol.jogf.zerohome.home -text [_ "Send active axis home \[Home\]"]
 DynamicHelp::add $_axes_conntrol.jogf.zerohome.zero -text [_ "Set G54 offset for active axis \[End\]"]
 DynamicHelp::add $_axes_conntrol.jogf.zerohome.tooltouch -text [_ "Set tool offset for loaded tool \[Control-End\]"]
-DynamicHelp::add $_axes_conntrol.axes.axisx -text [_ "Activate axis \[X\]"]
-DynamicHelp::add $_axes_conntrol.axes.axisy -text [_ "Activate axis \[Y\]"]
-DynamicHelp::add $_axes_conntrol.axes.axisz -text [_ "Activate axis \[Z\]"]
-DynamicHelp::add $_axes_conntrol.axes.axisa -text [_ "Activate axis \[A\]"]
-DynamicHelp::add $_axes_conntrol.axes.axisb -text [_ "Activate axis \[4\]"]
-DynamicHelp::add $_axes_conntrol.axes.axisc -text [_ "Activate axis \[5\]"]
+DynamicHelp::add $_axes_conntrol.axes1.axisx -text [_ "Activate axis \[X\]"]
+DynamicHelp::add $_axes_conntrol.axes1.axisy -text [_ "Activate axis \[Y\]"]
+DynamicHelp::add $_axes_conntrol.axes1.axisz -text [_ "Activate axis \[Z\]"]
+DynamicHelp::add $_axes_conntrol.axes1.axisa -text [_ "Activate axis \[A\]"]
+DynamicHelp::add $_axes_conntrol.axes1.axisb -text [_ "Activate axis \[4\]"]
+DynamicHelp::add $_axes_conntrol.axes1.axisc -text [_ "Activate axis \[5\]"]
 DynamicHelp::add $_axes_conntrol.jogf.jog.jogminus -text [_ "Jog selected axis"]
 DynamicHelp::add $_axes_conntrol.jogf.jog.jogplus -text [_ "Jog selected axis"]
 DynamicHelp::add $_axes_conntrol.jogf.jog.jogincr -text [_ "Select jog increment"]

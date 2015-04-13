@@ -243,7 +243,7 @@ void do_homing(void)
 		   determines what state is next */
 		if (joint->home_flags & HOME_IS_SHARED && home_sw_active) {
 		    reportError(
-			_("Cannot home while shared home switch is closed"));
+			_("Cannot home while shared home switch is closed. Tested By Nguyen Hung At Robot3t"));
 		    joint->home_state = HOME_IDLE;
 		    break;
 		}

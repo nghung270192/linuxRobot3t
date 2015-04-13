@@ -1180,12 +1180,12 @@ axes_conntrol = str(root_window.tk.call("set", "_axes_conntrol"))
 tabs_numbers = str(root_window.tk.call("set", "_tabs_numbers"))
 pane_top = str(root_window.tk.call("set", "pane_top"))
 pane_bottom = str(root_window.tk.call("set", "pane_bottom"))
+frame_setting = str(root_window.tk.call("set", "frame_setting"))
 widgets = nf.Widgets(root_window, 
     ("help_window", Toplevel, ".keys"),
     ("about_window", Toplevel, ".about"),
-    #("text", Text, pane_bottom + ".t.text"),
     ("text", Text, tabs_manual + ".gcode.text"),
-    ("preview_frame", Frame, tabs_preview),
+    ("preview_frame", Frame, preview_frame),
     ("numbers_text", Text, tabs_numbers + ".text"),
     ("tabs", bwidget.NoteBook, pane_top + ".tabs"),
     ("right", bwidget.NoteBook, pane_top + ".right"),
@@ -1204,22 +1204,24 @@ widgets = nf.Widgets(root_window,
     ("axis_v", Button, axes_conntrol + ".axes1.axisvbt"),
     ("axis_w", Button, axes_conntrol + ".axes1.axiswbt"),
 
-    ("joints", Radiobutton, axes_conntrol + ".joints"),
-    ("joint_0", Radiobutton, axes_conntrol + ".joints.joint0"),
-    ("joint_1", Radiobutton, axes_conntrol + ".joints.joint1"),
-    ("joint_2", Radiobutton, axes_conntrol + ".joints.joint2"),
-    ("joint_3", Radiobutton, axes_conntrol + ".joints.joint3"),
-    ("joint_4", Radiobutton, axes_conntrol + ".joints.joint4"),
-    ("joint_5", Radiobutton, axes_conntrol + ".joints.joint5"),
-    ("joint_6", Radiobutton, axes_conntrol + ".joints.joint6"),
-    ("joint_7", Radiobutton, axes_conntrol + ".joints.joint7"),
-    ("joint_8", Radiobutton, axes_conntrol + ".joints.joint8"),
-    ("joint_9", Radiobutton, axes_conntrol + ".joints.joint9"),
+    ("settext", Label, axes_conntrol + ".axes1.axiswtxt"),
+
+    ("joints", Button, axes_conntrol + ".joint1s"),
+    ("joint_0", Button, axes_conntrol + ".joint1s.joint0"),
+    ("joint_1", Button, axes_conntrol + ".joint1s.joint1"),
+    ("joint_2", Button, axes_conntrol + ".joint1s.joint2"),
+    ("joint_3", Button, axes_conntrol + ".joint1s.joint3"),
+    ("joint_4", Button, axes_conntrol + ".joint1s.joint4"),
+    ("joint_5", Button, axes_conntrol + ".joint1s.joint5"),
+    ("joint_6", Button, axes_conntrol + ".joint1s.joint6"),
+    ("joint_7", Button, axes_conntrol + ".joint1s.joint7"),
+    ("joint_8", Button, axes_conntrol + ".joint1s.joint8"),
+    ("joint_9", Button, axes_conntrol + ".joint1s.joint9"),
 
     ("jogincr", Entry, axes_conntrol + ".jogf.jog.jogincr"),
     ("override", Checkbutton, axes_conntrol + ".jogf.override"),
 
-    ("ajogspeed", Entry, pane_top + ".ajogspeed"),
+    ("ajogspeed", Entry, pane_bottom + ".ajogspeed"),
 
     ("lubel", Label, axes_conntrol + ".coolant"),
     ("flood", Checkbutton, axes_conntrol + ".flood"),
@@ -1243,10 +1245,10 @@ widgets = nf.Widgets(root_window,
     ("view_p", Button, ".toolbar.view_p"),
     ("rotate", Button, ".toolbar.rotate"),
 
-    ("feedoverride", Scale, pane_top + ".feedoverride.foscale"),
-    ("rapidoverride", Scale, pane_top + ".rapidoverride.foscale"),
-    ("spinoverride", Scale, pane_top + ".spinoverride.foscale"),
-    ("spinoverridef", Scale, pane_top + ".spinoverride"),
+    ("feedoverride", Scale, frame_setting + ".feedoverride.foscale"),
+    ("rapidoverride", Scale, frame_setting + ".rapidoverride.foscale"),
+    ("spinoverride", Scale, frame_setting + ".spinoverride.foscale"),
+    ("spinoverridef", Scale, frame_setting + ".spinoverride"),
 
     ("menu_view", Menu, ".menu.view"),
     ("menu_grid", Menu, ".menu.view.grid"),
@@ -1268,7 +1270,7 @@ def activate_axis(i, force=0):
         if not s.axis_mask & (1<<i): return
         axis = getattr(widgets, "axis_%s" % "xyzabcuvw"[i])
     axis.focus()
-    axis.invoke()
+    #axis.invoke()
 
 def set_first_line(lineno):
     global program_start_line
@@ -2442,6 +2444,8 @@ class TclCommands(nf.TclCommands):
                 ensure_mode(linuxcnc.MODE_MANUAL)
                 c.home("xyzabcuvw".index("w"))
 
+    def set_text1(event=None):
+            widgets.settext.configure(textvariable=_("Nguyen Hung"))
     def unhome_axis(event=None):
         if not manual_ok(): return
         ensure_mode(linuxcnc.MODE_MANUAL)
@@ -3032,9 +3036,9 @@ vars.max_aspeed.set(float(mav))
 mv = inifile.find("DISPLAY","MAX_LINEAR_VELOCITY") or inifile.find("TRAJ","MAX_LINEAR_VELOCITY") or inifile.find("TRAJ","MAX_VELOCITY") or inifile.find("AXIS_0","MAX_VELOCITY") or 1.0
 vars.maxvel_speed.set(float(mv)*60)
 vars.max_maxvel.set(float(mv))
-root_window.tk.eval("${pane_top}.jogspeed.s set [setval $jog_speed $max_speed]")
-root_window.tk.eval("${pane_top}.ajogspeed.s set [setval $jog_aspeed $max_aspeed]")
-root_window.tk.eval("${pane_top}.maxvel.s set [setval $maxvel_speed $max_maxvel]")
+root_window.tk.eval("${pane_bottom}.jogspeed.s set [setval $jog_speed $max_speed]")
+root_window.tk.eval("${pane_bottom}.ajogspeed.s set [setval $jog_aspeed $max_aspeed]")
+root_window.tk.eval("${pane_bottom}.maxvel.s set [setval $maxvel_speed $max_maxvel]")
 widgets.feedoverride.configure(to=max_feed_override)
 widgets.rapidoverride.configure(to=100)
 widgets.spinoverride.configure(to=max_spindle_override)
@@ -3061,12 +3065,12 @@ else:
     if lu in [.001, .01, .1, 1, 10]: vars.metric.set(1)
     else: vars.metric.set(0)
 if lu == 1:
-    root_window.tk.eval("${pane_top}.jogspeed.l1 configure -text mm/min")
-    root_window.tk.eval("${pane_top}.maxvel.l1 configure -text mm/min")
+    root_window.tk.eval("${pane_bottom}.jogspeed.l1 configure -text mm/min")
+    root_window.tk.eval("${pane_bottom}.maxvel.l1 configure -text mm/min")
 else:
-    root_window.tk.eval("${pane_top}.jogspeed.l1 configure -text in/min")
-    root_window.tk.eval("${pane_top}.maxvel.l1 configure -text in/min")
-root_window.tk.eval(u"${pane_top}.ajogspeed.l1 configure -text deg/min")
+    root_window.tk.eval("${pane_bottom}.jogspeed.l1 configure -text in/min")
+    root_window.tk.eval("${pane_bottom}.maxvel.l1 configure -text in/min")
+root_window.tk.eval(u"${pane_bottom}.ajogspeed.l1 configure -text deg/min")
 homing_order_defined = inifile.find("AXIS_0", "HOME_SEQUENCE") is not None
 
 if homing_order_defined:

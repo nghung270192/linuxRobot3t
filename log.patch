@@ -1,0 +1,33 @@
+./src/emc/motion/homing.c:			_("Cannot home while shared home switch is closed"));
+Binary file ./src/emc/motion/homing.o matches
+./src/objects/pt_br.msg:::msgcat::mcset pt_br "Cannot home while shared home switch is closed" "Imposs\u00edvel efetuar sequencia de homing enquanto um interruptor de home compartilhado est\u00e1 fechado"
+./src/objects/de.msg:::msgcat::mcset de "Cannot home while shared home switch is closed" "Keine Referenzfahrt bei geschlossenem gemeinsamem Endschalter"
+./src/objects/zh_hk.msg:::msgcat::mcset zh_hk "Cannot home while shared home switch is closed" "\u7576\u5171\u4eab\u96f6\u958b\u95dc\u9589\u4e0a\u6642,\u4e0d\u80fd\u6b78\u96f6"
+./src/objects/fr.msg:::msgcat::mcset fr "Cannot home while shared home switch is closed" "ne peut rechercher l'origine tant que le contact partag\u00e9 est attaqu\u00e9"
+./src/objects/it.msg:::msgcat::mcset it "Cannot home while shared home switch is closed" "Impossibile azzeramento mente lo switch di zero condiviso \u00e8 chiuso"
+Binary file ./src/motmod.o matches
+Binary file ./src/motmod.ko matches
+./src/po/zh_CN.po:msgid "Cannot home while shared home switch is closed"
+./src/po/pt_BR.po:msgid "Cannot home while shared home switch is closed"
+./src/po/es.po:msgid "Cannot home while shared home switch is closed"
+./src/po/sr.po:msgid "Cannot home while shared home switch is closed"
+./src/po/linuxcnc.pot:msgid "Cannot home while shared home switch is closed"
+./src/po/sk.po:msgid "Cannot home while shared home switch is closed"
+./src/po/it.po:msgid "Cannot home while shared home switch is closed"
+./src/po/ja.po:msgid "Cannot home while shared home switch is closed"
+./src/po/sv.po:msgid "Cannot home while shared home switch is closed"
+./src/po/pl.po:msgid "Cannot home while shared home switch is closed"
+./src/po/fr.po:msgid "Cannot home while shared home switch is closed"
+./src/po/ru.po:msgid "Cannot home while shared home switch is closed"
+./src/po/de.po:msgid "Cannot home while shared home switch is closed"
+./src/po/zh_TW.po:msgid "Cannot home while shared home switch is closed"
+./src/po/zh_HK.po:msgid "Cannot home while shared home switch is closed"
+./src/po/fi.po:msgid "Cannot home while shared home switch is closed"
+./src/po/ro.po:msgid "Cannot home while shared home switch is closed"
+./src/po/hu.po:msgid "Cannot home while shared home switch is closed"
+Binary file ./rtlib/motmod.ko matches
+Binary file ./share/locale/zh_HK/LC_MESSAGES/linuxcnc.mo matches
+Binary file ./share/locale/fr/LC_MESSAGES/linuxcnc.mo matches
+Binary file ./share/locale/de/LC_MESSAGES/linuxcnc.mo matches
+Binary file ./share/locale/it/LC_MESSAGES/linuxcnc.mo matches
+Binary file ./share/locale/pt_BR/LC_MESSAGES/linuxcnc.mo matches
